@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger House — Бургеры с характером</title>
+    <style>
+        /* Базовые стили */
+        :root {
+            --primary: #D35400;
+            --primary-dark: #A04000;
+            --secondary: #2C3E50;
+            --light: #FDFEFE;
+            --gray: #ECF0F1;
+            --text: #2C3E50;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Шапка и герой */
+        header {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px 0 120px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+        }
+
+        /* О нас */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Меню */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-item-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-content {
+            padding: 25px;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .menu-item-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .menu-item-description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .menu-item-ingredients {
+            border-top: 1px solid var(--gray);
+            padding-top: 15px;
+        }
+
+        .menu-item-ingredients h4 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .menu-item-ingredients ul {
+            list-style-type: none;
+        }
+
+        .menu-item-ingredients li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .menu-item-ingredients li:last-child {
+            border-bottom: none;
+        }
+
+        /* Преимущества */
+        .advantages {
+            background-color: var(--gray);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .advantage-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .advantage-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        /* Форма заказа */
+        .order {
+            text-align: center;
+        }
+
+        .order-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            list-style-type: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка и герой -->
+    <header>
+        <div class="container">
+            <div class="logo">BURGER<span>HOUSE</span></div>
+            <p class="tagline">Ресторан-бургерная в Санкт-Петербурге, где рождаются бургеры с характером</p>
+            
+            <div class="hero">
+                <h1>Бургеры, которые вы запомните</h1>
+                <p>Мы создаём не просто бургеры, а кулинарные произведения: сочные котлеты из отборной говядины, хрустящий бекон, авторские соусы и свежие овощи в идеальной булочке бриошь</p>
+                <a href="#order" class="btn">Заказать сейчас</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- О нас -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">О нашем ресторане</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Burger House — это не просто ресторан-бургерная, а место, где страсть к гастрономии встречается с искусством приготовления бургеров. Каждый наш бургер — это история, созданная из лучших ингредиентов и приготовленная с вниманием к деталям.</p>
+                    <p>Мы тщательно отбираем мраморную говядину, печём булочки ежедневно, экспериментируем с сочетаниями вкусов и создаём соусы, которые стали нашими фирменными. Наша цель — дарить вам не просто еду, а эмоции и незабываемые вкусовые впечатления.</p>
+                    <p>Приходите к нам в гости или заказывайте доставку — и откройте для себя мир бургеров, который изменит ваше представление о фастфуде навсегда.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Интерьер бургерной">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Меню -->
+    <section class="menu">
+        <div class="container">
+            <h2 class="section-title">Наши хиты</h2>
+            <div class="menu-grid">
+                <!-- Бургер 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Классический бургер">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Классик Хаус</h3>
+                            <div class="menu-item-price">389 р.</div>
+                        </div>
+                        <p class="menu-item-description">Идеальный классический бургер: сочная говяжья котлета 200г, сыр чеддер, хрустящий бекон, свежие овощи и наш фирменный соус в булочке бриошь</p>
+                        <div class="menu-item-ingredients">
+                            <h4>Состав</h4>
+                            <ul>
+                                <li>Булочка бриошь</li>
+                                <li>Котлета из мраморной говядины (200г)</li>
+                                <li>Сыр чеддер</li>
+                                <li>Бекон</li>
+                                <li>Салат айсберг, помидор, красный лук</li>
+                                <li>Фирменный соус Burger House</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Бургер 2 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Черный бургер">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Чёрный Трюфель</h3>
+                            <div class="menu-item-price">459 р.</div>
+                        </div>
+                        <p class="menu-item-description">Элитный бургер с трюфельным соусом, котлетой из говядины вагю, сыром дорблю и рукколой в чёрной булочке с активированным углём</p>
+                        <div class="menu-item-ingredients">
+                            <h4>Состав</h4>
+                            <ul>
+                                <li>Чёрная булочка с активированным углём</li>
+                                <li>Котлета из говядины вагю (180г)</li>
+                                <li>Сыр дорблю</li>
+                                <li>Трюфельный соус</li>
+                                <li>Руккола, карамелизированный лук</li>
+                                <li>Пармезан</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Бургер 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Острый бургер">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Огненный Перец</h3>
+                            <div class="menu-item-price">419 р.</div>
+                        </div>
+                        <p class="menu-item-description">Для любителей острого: двойная котлета, острый сыр халапеньо, чипотле соус, маринованные огурчики и салат в булочке с паприкой</p>
+                        <div class="menu-item-ingredients">
+                            <h4>Состав</h4>
+                            <ul>
+                                <li>Булочка с паприкой</li>
+                                <li>Двойная говяжья котлета (2x120г)</li>
+                                <li>Острый сыр с халапеньо</li>
+                                <li>Соус чипотле</li>
+                                <li>Маринованные огурцы, халапеньо</li>
+                                <li>Салат ромен, помидор</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="advantages">
+        <div class="container">
+            <h2 class="section-title">Наши преимущества</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="advantage-title">Натуральные ингредиенты</h3>
+                    <p>Мы работаем только с проверенными фермерскими хозяйствами. Мясо, овощи, зелень — всё отборное и свежее</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="advantage-title">Быстрая доставка</h3>
+                    <p>Доставляем заказы в течение 60 минут. Бургеры путешествуют в специальных термосумках, сохраняя температуру и сочность</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3 class="advantage-title">Авторские рецепты</h3>
+                    <p>Каждый бургер создан нашим шеф-поваром. Мы постоянно экспериментируем и добавляем в меню новые хиты</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="advantage-title">Уютная атмосфера</h3>
+                    <p>В нашем ресторане царит атмосфера настоящей американской бургерной с современным дизайном и дружелюбным персоналом</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма заказа -->
+    <section class="order" id="order">
+        <div class="container">
+            <h2 class="section-title">Создайте свой идеальный бургер</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 50px;">Не нашли подходящий вариант? Соберите свой уникальный бургер! Выберите тип булочки, мяса, сыра, соуса и добавок. Мы приготовим его специально для вас.</p>
+            
+            <div class="order-form">
+                <form id="burgerForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="burger-type">Тип бургера</label>
+                        <select id="burger-type" class="form-control">
+                            <option value="classic">Классический (говядина)</option>
+                            <option value="chicken">Куриный</option>
+                            <option value="vegan">Вегетарианский</option>
+                            <option value="double">Двойной мясной</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additives">Дополнительные пожелания</label>
+                        <textarea id="additives" class="form-control" placeholder="Укажите ваши предпочтения по ингредиентам, соусам или особенности приготовления..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">Заказать свой бургер</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">Burger House</h3>
+                    <p>Ресторан-бургерная в Санкт-Петербурге, где рождаются бургеры с характером. Открыты для вас ежедневно с 11:00 до 23:00.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Санкт-Петербург, ул. Бургерная, 15</li>
+                        <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@burgerhouse.ru</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Часы работы</h3>
+                    <ul class="footer-links">
+                        <li>Пн-Чт: 11:00 - 23:00</li>
+                        <li>Пт-Сб: 11:00 - 00:00</li>
+                        <li>Вс: 12:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Burger House. Все права защищены. Сайт создан на Tilda.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка формы заказа
+        document.getElementById('burgerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const burgerType = document.getElementById('burger-type').value;
+            const additives = document.getElementById('additives').value;
+            
+            // В реальном проекте здесь был бы AJAX-запрос к серверу
+            alert(`Спасибо, ${name}! Ваш заказ на "${burgerType}" бургер принят. Мы свяжемся с вами по номеру ${phone} в течение 10 минут для уточнения деталей.`);
+            
+            // Очистка формы
+            document.getElementById('burgerForm').reset();
+        });
+        
+        // Плавная прокрутка к форме заказа при клике на кнопку в шапке
+        document.querySelector('a[href="#order"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#order').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
